@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { mongoconnection,model,UserCart,product } = require("./connection");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const { createcheckoutsession,addtocart, productsdetails, logindata, registerdata,getcartdata,removeFromCart ,addQuantity,removeQuantity} = require("./controller");
+const { addtocart, productsdetails, logindata, registerdata,getcartdata,removeFromCart ,addQuantity,removeQuantity,paymentdetails,getproductdetail,createcheckoutsession} = require("./controller");
 const secretKey = "sohamsawant";
 const { ObjectId } = mongoose.Types;
 
@@ -45,6 +45,6 @@ router.post("/add-to-cart", authenticateToken,addtocart)
   
   // Endpoint to remove quantity for a product in the cart
   router.put('/removeQuantity/:productId',authenticateToken,removeQuantity)
-  
-  
+  router.post('/payment-details',authenticateToken,paymentdetails)
+  router.get('/getproductdetail',authenticateToken,getproductdetail)
   module.exports = { router};

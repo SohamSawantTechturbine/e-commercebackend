@@ -42,7 +42,31 @@ const usercart=new mongoose.Schema({
   }]
 
 })
+const userproductdetails=new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  products: [{
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'product'
+    },
+    productTitle:{
+     type:String
+    },
+    productPrice:{
+      type:String
+    },
+    quantity: {
+      type: Number,
+      default: 1
+    },
+    productimage:{type:String},
+    productTotalPrice:Number,
+  }]
 
+})
 const products=new mongoose.Schema({
   id:String,
   title:String,
@@ -50,7 +74,8 @@ const products=new mongoose.Schema({
   description:String,
   category:String,
   image:String,
-
+  // name:String,
+  // phone:String,
   rating: {
     rate: {
       type: Number,
@@ -66,4 +91,5 @@ const products=new mongoose.Schema({
 const model = mongoose.model("User", schema); 
 const UserCart = mongoose.model("UserCart", usercart); 
 const product=mongoose.model("product",products)
-module.exports = { mongoconnection, model,UserCart,product }; 
+const productdetail=mongoose.model("productdetail",userproductdetails)
+module.exports = { mongoconnection, model,UserCart,product,productdetail }; 
